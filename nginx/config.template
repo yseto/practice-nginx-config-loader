@@ -1,0 +1,17 @@
+#upstream somestream {
+#  hash $request_uri consistent;
+#{{ range $i, $member := .Servers }}
+#  server {{ $member }};
+{{- end }}
+#}
+
+server {
+    listen       80;
+    server_name  localhost;
+
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+}
+
